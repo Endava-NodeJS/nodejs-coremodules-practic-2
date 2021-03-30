@@ -15,9 +15,14 @@ const getData = () => {
 
 }
 
-const readNote = (title) => {
+const getNote = (title) => {
   const data = getData();
 
+  return note = data.find(el => el.title === title);
+}
+
+const readNote = (title) => {
+  const data = getData();
   const note = data.find(el => el.title === title)
 
   if (note) {
@@ -27,9 +32,18 @@ const readNote = (title) => {
   }
 }
 
+const editNote = (title, content) => {
+  const note = getNote(title);
+  const data = getData();
+
+  console.log(content);
+
+  
+}
 // console.log("🚀 ~ file: notes.js ~ line 4 ~ data", getData())
 
 module.exports = {
   getData: getData,
   readNote: readNote,
+  editNote: editNote,
 }
