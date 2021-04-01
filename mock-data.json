@@ -1,14 +1,1 @@
-[
-  {
-    "title": "title_1",
-    "content": "message note 1"
-  },
-  {
-    "title": "title_2",
-    "content": "message note 2"
-  },
-  {
-    "title": "title_3",
-    "content": "message note 3"
-  }
-]
+[{"title":"to do:","content":"learn nodejs"},{"title":"daily review","content":"Today the weather was great and the food was tasty"}]
