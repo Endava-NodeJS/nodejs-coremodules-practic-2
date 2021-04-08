@@ -1,7 +1,6 @@
 const DB = require('./db');
 
 const db = new DB('./notes.json');
-
 const endpoints = new Map()
 
 endpoints.set('/notes', {
