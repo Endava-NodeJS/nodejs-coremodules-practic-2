@@ -1,21 +1,23 @@
-const DB = require('./db');
+const http = require("http");
 
-const db = new DB('./notes.json');
+const { getParam, endpoints } = require("./controller");
 
+const requestListener = (req, res) => {
+  const match = getParam(req.url);
+  const param = match.includes('notes') ? null : match
+  const path = "/notes";
 
-const http = require('http');
-const { endpoints } = require('./controller')
+  if (endpoints.has(path) && !param) {
+    endpoints.get(path)[req.method.toLowerCase()](req, res);
+  } else if (endpoints.has(`${path}/:id`) && param) {
+    req.params = param;
 
-console.log(db.get());
-
-const requestListener = function (req, res) {
-    if (endpoints.has(req.url)) {
-      endpoints.get(req.url)[req.method.toLowerCase()](req, res)
-    }
-
-    res.writeHead(200);
-    res.end('Hello world');
-}
+    endpoints.get(`${path}/:id`)[req.method.toLowerCase()](req, res);
+  } else {
+    res.end("Welcome. To add a note, go to /notes endpoint.");
+  }
+};
 
 const server = http.createServer(requestListener);
+
 server.listen(8080);

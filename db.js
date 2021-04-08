@@ -126,8 +126,9 @@ class DB {
    * @returns UpdatedNote | null
    */
   update(note) {
-    if (!note?.title || !note?.content) {
-      console.error('[UPDATE] "title" and "content" should be provided.');
+    console.log('note', note)
+    if (!note?.title && !note?.content) {
+      console.error('[UPDATE] "title" or "content" should be provided.');
     } else {
       const notes = this.readSafeFile();
       const updatedNotes = notes.map((dbNote) => {
