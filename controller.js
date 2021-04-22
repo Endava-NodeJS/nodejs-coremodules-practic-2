@@ -5,8 +5,7 @@ const endpoints = new Map()
 
 endpoints.set('/notes', {
   get: (req, res) => {
-    console.log(db.get())
-    res.write(JSON.stringify(db.get()))
+    res.end(JSON.stringify(db.get()))
   },
   post: (req, res) => {
     let data = ''
@@ -19,7 +18,7 @@ endpoints.set('/notes', {
       const { title, content } = body
 
       db.add({title, content})
-      res.write('Successfully added')
+      res.end(JSON.stringify(db.get()))
     })
   
     req.on('error', (e) => {
@@ -27,7 +26,34 @@ endpoints.set('/notes', {
     })
   }
 })
-
+endpoints.set('/notes/:id', {
+  
+  get: (req, res) => {
+    res.end(JSON.stringify(db.get(req.queryParam)))
+  },
+  put: (req, res) => {
+    let data = ''
+    let body
+    req.on('data', (chunk) => {
+      data += chunk
+    })
+    req.on('end', () => {
+      body = JSON.parse(data)
+      const { title, content } = body
+      const id = req.queryParam
+      db.update({title, content, id})
+      res.end(JSON.stringify(db.get(id)))
+    })
+  
+    req.on('error', (e) => {
+      console.log(e)
+    })
+  },
+  delete: (req, res) => {
+    db.delete(req.queryParam)
+    res.end(JSON.stringify(db.get()))
+  },
+})
 module.exports = {
   endpoints
 }

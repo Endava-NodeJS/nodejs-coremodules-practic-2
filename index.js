@@ -5,17 +5,28 @@ const db = new DB('./notes.json');
 
 const http = require('http');
 const { endpoints } = require('./controller')
-
-console.log(db.get());
+const url = require('url');
+const querystring = require('querystring');
 
 const requestListener = function (req, res) {
-    if (endpoints.has(req.url)) {
+    const urlInfo = querystring.parse(req.url, '?')
+    const urlParams = Object.keys(urlInfo)
+    try{
+      if (endpoints.has(req.url)) {
       endpoints.get(req.url)[req.method.toLowerCase()](req, res)
-    }
+      }
 
-    res.writeHead(200);
-    res.end('Hello world');
-}
+      else if (endpoints.has(`${urlParams[0]}:${urlParams[1]}`)) {
+      req.queryParam = urlInfo.id
+      endpoints.get(`${urlParams[0]}:${urlParams[1]}`)[req.method.toLowerCase()](req, res)
+      }
+      else 
+      res.end('page not found');
+    }
+    catch(e){res.end(e.message);}
+  
+
+}  
 
 const server = http.createServer(requestListener);
 server.listen(8080);
