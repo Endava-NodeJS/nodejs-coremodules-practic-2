@@ -14,6 +14,7 @@ const requestListener = function (req, res) {
     }
 
     res.writeHead(200);
+    console.log("🚀 ~ file: index.js ~ line 17 ~ requestListener ~ res", res)
     res.end('Hello world');
 }
 
