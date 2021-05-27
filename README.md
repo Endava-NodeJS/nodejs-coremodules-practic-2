@@ -1,21 +1,10 @@
-# API DataBase
+## Welcome to Node.js Workshop Practic Group 1
 
-### Today we have to connect SQLite database to our previously created API.
+In this repository we track our workshop practical lession activity. So on each practical lession you should to create a new ```practica-{number of lesson}``` folder and place all related content there. If current scope work depends on code from previous lessions, so just copy it and place in the new lesson folder.
 
-- Using the library [sqlite for NodeJS](https://www.npmjs.com/package/sqlite) connect the database.
-- Create the "todo" table in the database.
-- Move existing data into the database.
-- Write, read, delete and update operations should be implemented using the database.
+For indvidual work/experments please follow the next approach:
+ - checkout new branch with your name from master branch with the latest changes.
+ - place your work in the root of the repository with following naming pattern "```{your name}-solution-{number of the lesson, if necessary}```"
 
-* * `Notice that you can use Express.`
 
-#### For those who are not familiar with SQLite, here are some queries that you can use:
-- 'CREATE TABLE IF NOT EXISTS todo (title TEXT UNIQUE, content TEXT, id INTEGER NOT NULL PRIMARY KEY)'
-- \`INSERT INTO todo(title, content) values(${title}, ${content})\`
-- 'UPDATE todo SET title=?, content=? WHERE id=?' (You can create query using the template string or like that, both are ok)
-- 'SELECT * FROM todo'
-- 'SELECT title, content, id FROM todo WHERE id=?' or \`SELECT title, content, id FROM todo WHERE id=${id}\`
-- 'DELETE FROM todo WHERE id=?'
-
-[SQLite docs](https://www.sqlite.org/index.html)
-[DB management tool](https://dbeaver.io/download/)
+During the practical lessons, use ```practica``` branch for the work. Branch should contain the latest changes at the beggining of the each practical lesson, and all changes should be commit at the end.
